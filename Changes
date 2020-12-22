@@ -1,3 +1,11 @@
+0.002   2020-12-22  Released-By: PERLANCAR; Urgency: low
+
+	- No functional changes.
+
+	- [dist] Forgot to include POD Weaver plugin to show benchmark
+	  sample results.
+
+
 0.001   2020-12-22  Released-By: PERLANCAR
 
         - First release.
