@@ -36,10 +36,10 @@ This module creates v1 and v2 UUIDs. Depending on the OS, for MAC address, it
 usually uses a hash of hostname instead. This module is XS, so performance is
 good. If you cannot use an XS module, try <pm:UUID::Tiny> instead.
 
-The benchmark code creates 1000 v1 string UUIDs.
+The benchmark code creates 1000+1 v1 string UUIDs.
 
 _
-            bench_code_template => 'my $u = Data::UUID->new; $u->create for 1..1000',
+            bench_code_template => 'my $u = Data::UUID->new; $u->create for 1..1000; $u->create',
             features => {
                 is_xs => 1,
                 is_pp => 0,
@@ -60,13 +60,13 @@ This module should be your go-to choice if you cannot use an XS module.
 To create a cryptographically secure random (v4) UUIDs, use
 <pm:UUID::Tiny::Patch::UseMRS>.
 
-The benchmark code creates 1000 v1 string UUIDs.
+The benchmark code creates 1000+1 v1 string UUIDs.
 
 See also: <pm:Types::UUID> which is a type library that uses Data::UUID as the
 backend.
 
 _
-            bench_code_template => 'UUID::Tiny::create_uuid() for 1..1000',
+            bench_code_template => 'UUID::Tiny::create_uuid() for 1..1000; UUID::Tiny::create_uuid()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -91,10 +91,10 @@ bit of entropy.
 To create a cryptographically secure random UUIDs, use <pm:UUID::Random::Secure>
 or <pm:UUID::Random::Patch::UseMRS>.
 
-The benchmark code creates 1000 v4 string UUIDs.
+The benchmark code creates 1000+1 v4 string UUIDs.
 
 _
-            bench_code_template => 'UUID::Random::generate() for 1..1000',
+            bench_code_template => 'UUID::Random::generate() for 1..1000; ; UUID::Random::generate()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -113,10 +113,10 @@ _
 
 Just another implementation of <pm:UUID::Random>.
 
-The benchmark code creates 1000 v4 string UUIDs.
+The benchmark code creates 1000+1 v4 string UUIDs.
 
 _
-            bench_code_template => 'UUID::Random::PERLANCAR::generate() for 1..1000',
+            bench_code_template => 'UUID::Random::PERLANCAR::generate() for 1..1000; UUID::Random::PERLANCAR::generate()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -136,10 +136,10 @@ _
 Just like <pm:UUID::Random>, except it uses <pm:Math::Random::Secure>'s
 `irand()` to produce random numbers.
 
-The benchmark code creates 1000 v4 string UUIDs.
+The benchmark code creates 1000+1 v4 string UUIDs.
 
 _
-            bench_code_template => 'UUID::Random::Secure::generate() for 1..1000',
+            bench_code_template => 'UUID::Random::Secure::generate() for 1..1000; UUID::Random::Secure::generate()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
