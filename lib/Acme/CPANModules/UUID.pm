@@ -88,8 +88,8 @@ hexadecimal digits of the UUID (v4). Not really recommended, since perl's
 default pseudo-random generator is neither cryptographically secure nor has 128
 bit of entropy.
 
-To create a cryptographically secure random UUIDs, use
-<pm:UUID::Random::Patch::UseMRS>.
+To create a cryptographically secure random UUIDs, use <pm:UUID::Random::Secure>
+or <pm:UUID::Random::Patch::UseMRS>.
 
 The benchmark code creates 1000 v4 string UUIDs.
 
@@ -103,6 +103,51 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 0,
+                create_v5 => 0,
+            },
+        },
+
+        {
+            module => 'UUID::Random::PERLANCAR',
+            description => <<'_',
+
+Just another implementation of <pm:UUID::Random>.
+
+The benchmark code creates 1000 v4 string UUIDs.
+
+_
+            bench_code_template => 'UUID::Random::PERLANCAR::generate() for 1..1000',
+            features => {
+                is_xs => 0,
+                is_pp => 1,
+                create_v1 => 0,
+                create_v2 => 0,
+                create_v3 => 0,
+                create_v4 => 1,
+                v4_secure_random => 0,
+                create_v5 => 0,
+            },
+        },
+
+        {
+            module => 'UUID::Random::Secure',
+            description => <<'_',
+
+Just like <pm:UUID::Random>, except it uses <pm:Math::Random::Secure>'s
+`irand()` to produce random numbers.
+
+The benchmark code creates 1000 v4 string UUIDs.
+
+_
+            bench_code_template => 'UUID::Random::Secure::generate() for 1..1000',
+            features => {
+                is_xs => 0,
+                is_pp => 1,
+                create_v1 => 0,
+                create_v2 => 0,
+                create_v3 => 0,
+                create_v4 => 1,
+                v4_secure_random => 1,
                 create_v5 => 0,
             },
         },
