@@ -20,7 +20,8 @@ node ID (usually the MAC address); version 2 (v2) UUIDs from an identifier
 random/pseudo-random number; version 3 (v3) UUIDs from hashing a namespace using
 MD5; version 5 (v5) from hashing a namespace using SHA-1.
 
-<pm:Data::UUID> should be your first choice,
+<pm:Data::UUID> should be your first choice, and when you cannot install XS
+modules you can use <pm:UUID::Tiny> instead.
 
 _
     entry_features => {
@@ -83,12 +84,14 @@ _
             description => <<'_',
 
 This module simply uses 32 calls to Perl's C<rand()> to construct each random
-hexadecimal digits of the UUID. Not really recommended, but it's dead simple.
+hexadecimal digits of the UUID (v4). Not really recommended, since perl's
+default pseudo-random generator is neither cryptographically secure nor has 128
+bit of entropy.
 
 To create a cryptographically secure random UUIDs, use
 <pm:UUID::Random::Patch::UseMRS>.
 
-The benchmark code creates 1000 v1 string UUIDs.
+The benchmark code creates 1000 v4 string UUIDs.
 
 _
             bench_code_template => 'UUID::Random::generate() for 1..1000',
