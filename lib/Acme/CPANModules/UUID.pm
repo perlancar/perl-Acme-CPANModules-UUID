@@ -201,6 +201,6 @@ _
 1;
 # ABSTRACT:
 
-=head1 SEE ALSO
+=head1 append:SEE ALSO
 
 RFC 4122, L<https://tools.ietf.org/html/rfc4122>
