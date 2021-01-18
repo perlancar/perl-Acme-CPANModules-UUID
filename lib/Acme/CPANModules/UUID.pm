@@ -102,10 +102,10 @@ _
 This module simply uses 32 calls to Perl's C<rand()> to construct each random
 hexadecimal digits of the UUID (v4). Not really recommended, since perl's
 default pseudo-random generator is neither cryptographically secure nor has 128
-bit of entropy.
+bit of entropy. It also does not produce v4 UUIDs that conform to RFC 4122 (no
+encoding of variant & version information).
 
-To create a cryptographically secure random UUIDs, use <pm:UUID::Random::Secure>
-or <pm:UUID::Random::Patch::UseMRS>.
+To create a cryptographically secure random UUIDs, use <pm:Crypt::Misc>.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
@@ -152,7 +152,8 @@ _
             description => <<'_',
 
 Just like <pm:UUID::Random>, except it uses <pm:Math::Random::Secure>'s
-`irand()` to produce random numbers.
+`irand()` to produce random numbers. Note that it does not produce v4 UUIDs that
+conform to RFC 4122 (no encoding of variant & version information).
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
@@ -167,6 +168,30 @@ _
                 create_v4 => 1,
                 v4_secure_random => 1,
                 v4_rfc4122 => 0,
+                create_v5 => 0,
+            },
+        },
+
+        {
+            module => 'Crypt::Misc',
+            description => <<'_',
+
+This module from the <pm:CryptX> distribution has a function to create and check
+v4 UUIDs.
+
+The benchmark code creates 1000+1 v4 string UUIDs.
+
+_
+            bench_code_template => 'Crypt::Misc::random_v4uuid() for 1..1000; Crypt::Misc::random_v4uuid()',
+            features => {
+                is_xs => 0,
+                is_pp => 1,
+                create_v1 => 0,
+                create_v2 => 0,
+                create_v3 => 0,
+                create_v4 => 1,
+                v4_secure_random => 1,
+                v4_rfc4122 => 1,
                 create_v5 => 0,
             },
         },
