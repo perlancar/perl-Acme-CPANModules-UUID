@@ -70,10 +70,9 @@ _
             module => 'UUID::Tiny',
             description => <<'_',
 
-This module should be your go-to choice if you cannot use an XS module.
-
-To create a cryptographically secure random (v4) UUIDs, use
-<pm:UUID::Tiny::Patch::UseMRS>.
+This module should be your go-to choice if you cannot use an XS module. It can
+create v1, v3, v4 UUIDs. However, the random v4 UUIDs are not cryptographically
+secure, if you need that use <pm:Crypt::Misc>.
 
 The benchmark code creates 1000+1 v1 string UUIDs.
 
