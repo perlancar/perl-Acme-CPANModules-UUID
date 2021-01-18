@@ -1,3 +1,11 @@
+0.005   2021-01-18  Released-By: PERLANCAR; Urgency: low
+
+	- No functional changes.
+
+	- Forgot to recommend Crypt::Misc (instead of UUID::Random family)
+	  in one instance.
+
+
 0.004   2021-01-18  Released-By: PERLANCAR; Urgency: medium
 
 	- Add entry: Crypt::Misc [GH#1].
