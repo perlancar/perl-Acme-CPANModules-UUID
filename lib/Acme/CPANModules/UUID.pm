@@ -54,7 +54,7 @@ good. If you cannot use an XS module, try <pm:UUID::Tiny> instead.
 The benchmark code creates 1000+1 v1 string UUIDs.
 
 _
-            bench_code_template => 'my $u = Data::UUID->new; $u->create for 1..1000; $u->create',
+            bench_code_template => 'my $u = Data::UUID->new; $u->create for 1..1000; $u->to_string($u->create)',
             features => {
                 is_xs => 1,
                 is_pp => 0,
@@ -81,7 +81,7 @@ See also: <pm:Types::UUID> which is a type library that uses Data::UUID as the
 backend.
 
 _
-            bench_code_template => 'UUID::Tiny::create_uuid() for 1..1000; UUID::Tiny::create_uuid()',
+            bench_code_template => 'UUID::Tiny::create_uuid() for 1..1000; UUID::Tiny::uuid_to_string(UUID::Tiny::create_uuid())',
             features => {
                 is_xs => 0,
                 is_pp => 1,
