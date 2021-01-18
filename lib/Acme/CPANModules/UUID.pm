@@ -12,19 +12,34 @@ our $LIST = {
     summary => 'Modules that can generate immutable universally unique identifier (UUIDs)',
     description => <<'_',
 
-UUIDs are 128-bit numbers that can be used as permanent IDs or keys in
-databases. There are 5 "versions" of UUID, each might be more suitable than
-others in specific cases. Version 1 (v1) UUIDs are generated from a time and a
-node ID (usually the MAC address); version 2 (v2) UUIDs from an identifier
-(group/user ID), a time, and a node ID; version 4 (v4) UUIDs from a
-random/pseudo-random number; version 3 (v3) UUIDs from hashing a namespace using
-MD5; version 5 (v5) from hashing a namespace using SHA-1.
+UUIDs (Universally Unique Identifiers), sometimes also called GUIDs (Globally
+Unique Identifiers), are 128-bit numbers that can be used as permanent IDs or
+keys in databases. There are several standards that specify UUID, one of which
+is RFC 4122 (2005), which we will follow in this document.
+
+UUIDs are canonically represented as 32 hexadecimal digits in the form of:
+
+    xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
+
+There are several variants of UUID. The variant information is encoded using 1-3
+bits in the `N` position. RFC 4122 defines 4 variants (0 to 3), two of which (0
+and 3) are for legacy UUIDs, so that leaves variants 1 and 2 as the current
+specification.
+
+There are 5 "versions" of UUID for both variants 1 & 2, each might be more
+suitable than others in specific cases. The version information is encoded in
+the M position. Version 1 (v1) UUIDs are generated from a time and a node ID
+(usually the MAC address); version 2 (v2) UUIDs from an identifier (group/user
+ID), a time, and a node ID; version 4 (v4) UUIDs from a random/pseudo-random
+number; version 3 (v3) UUIDs from hashing a namespace using MD5; version 5 (v5)
+from hashing a namespace using SHA-1.
 
 <pm:Data::UUID> should be your first choice, and when you cannot install XS
 modules you can use <pm:UUID::Tiny> instead.
 
 _
     entry_features => {
+        v4_rfc4122 => {summary => 'Whether the generated v4 UUID follows RFC 4122 specification (i.e. encodes variant and version information in M & N positions)'},
         v4_secure_random => {summary => 'Whether the module uses cryptographically secure pseudo-random number generator for v4 UUIDs'},
     },
     entries => [
@@ -75,6 +90,7 @@ _
                 create_v3 => 1,
                 create_v4 => 1,
                 v4_secure_random => 0,
+                v4_rfc4122 => 1,
                 create_v5 => 1,
             },
         },
@@ -103,6 +119,7 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 0,
+                v4_rfc4122 => 0,
                 create_v5 => 0,
             },
         },
@@ -125,6 +142,7 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 0,
+                v4_rfc4122 => 0,
                 create_v5 => 0,
             },
         },
@@ -148,6 +166,7 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 1,
+                v4_rfc4122 => 0,
                 create_v5 => 0,
             },
         },
@@ -156,3 +175,7 @@ _
 
 1;
 # ABSTRACT:
+
+=head1 SEE ALSO
+
+RFC 4122, L<https://tools.ietf.org/html/rfc4122>
