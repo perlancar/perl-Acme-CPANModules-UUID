@@ -37,6 +37,9 @@ from hashing a namespace using SHA-1.
 <pm:Data::UUID> should be your first choice, and when you cannot install XS
 modules you can use <pm:UUID::Tiny> instead.
 
+Aside from the modules listed as entries below, there are also:
+<pm:App::UUIDUtils> (containing CLIs to create/check UUID).
+
 _
     entry_features => {
         v4_rfc4122 => {summary => 'Whether the generated v4 UUID follows RFC 4122 specification (i.e. encodes variant and version information in M & N positions)'},
@@ -207,6 +210,7 @@ _
                 create_v5 => 0,
             },
         },
+
     ],
 };
 
