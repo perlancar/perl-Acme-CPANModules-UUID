@@ -132,7 +132,6 @@ Just another implementation of <pm:UUID::Random>.
 The benchmark code creates 1000+1 v4 string UUIDs.
 
 _
-            bench_code_template => 'UUID::Random::PERLANCAR::generate() for 1..1000; UUID::Random::PERLANCAR::generate()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -141,8 +140,16 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 0,
-                v4_rfc4122 => 0,
+                v4_rfc4122 => 1,
                 create_v5 => 0,
+            },
+            functions => {
+                generate => {
+                    bench_code_template => 'UUID::Random::PERLANCAR::generate() for 1..1000; UUID::Random::PERLANCAR::generate()',
+                },
+                generate_rfc => {
+                    bench_code_template => 'UUID::Random::PERLANCAR::generate_rfc() for 1..1000; UUID::Random::PERLANCAR::generate_rfc()',
+                },
             },
         },
 
@@ -151,13 +158,11 @@ _
             description => <<'_',
 
 Just like <pm:UUID::Random>, except it uses <pm:Math::Random::Secure>'s
-`irand()` to produce random numbers. Note that it does not produce v4 UUIDs that
-conform to RFC 4122 (no encoding of variant & version information).
+`irand()` to produce random numbers.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
 _
-            bench_code_template => 'UUID::Random::Secure::generate() for 1..1000; UUID::Random::Secure::generate()',
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -166,10 +171,18 @@ _
                 create_v3 => 0,
                 create_v4 => 1,
                 v4_secure_random => 1,
-                v4_rfc4122 => 0,
+                v4_rfc4122 => 1,
                 create_v5 => 0,
             },
-        },
+            functions => {
+                generate => {
+                    bench_code_template => 'UUID::Random::Secure::generate() for 1..1000; UUID::Random::Secure::generate()',
+                },
+                generate_rfc => {
+                    bench_code_template => 'UUID::Random::Secure::generate_rfc() for 1..1000; UUID::Random::Secure::generate_rfc()',
+                },
+            },
+         },
 
         {
             module => 'Crypt::Misc',
