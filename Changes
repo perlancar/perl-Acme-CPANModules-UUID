@@ -1,3 +1,10 @@
+0.005   2021-01-31  Released-By: PERLANCAR; Urgency: low
+
+	- No functional changes.
+
+	- Mention Data::GUID.
+
+
 0.004   2021-01-18  Released-By: PERLANCAR; Urgency: medium
 
 	- Add entry: Crypt::Misc [GH#1].
