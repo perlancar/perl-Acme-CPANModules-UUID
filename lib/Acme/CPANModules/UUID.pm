@@ -38,7 +38,8 @@ from hashing a namespace using SHA-1.
 modules you can use <pm:UUID::Tiny> instead.
 
 Aside from the modules listed as entries below, there are also:
-<pm:App::UUIDUtils> (containing CLIs to create/check UUID).
+<pm:App::UUIDUtils> (containing CLIs to create/check UUID), <pm:Data::GUID>
+(currently just a wrapper for Data::UUID).
 
 _
     entry_features => {
