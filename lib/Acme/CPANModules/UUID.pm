@@ -76,7 +76,7 @@ _
 
 This module should be your go-to choice if you cannot use an XS module. It can
 create v1, v3, v4 UUIDs. However, the random v4 UUIDs are not cryptographically
-secure, if you need that use <pm:Crypt::Misc>.
+secure; if you need cryptographically secure random UUIDs, use <pm:Crypt::Misc>.
 
 The benchmark code creates 1000+1 v1 string UUIDs.
 
