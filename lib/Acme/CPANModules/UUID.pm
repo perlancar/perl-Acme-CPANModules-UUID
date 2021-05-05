@@ -30,7 +30,7 @@ There are 5 "versions" of UUID for both variants 1 & 2, each might be more
 suitable than others in specific cases. The version information is encoded in
 the M position. Version 1 (v1) UUIDs are generated from a time and a node ID
 (usually the MAC address); version 2 (v2) UUIDs from an identifier (group/user
-ID), a time, and a node ID; version 4 (v4) UUIDs from a random/pseudo-random
+ID), a time, and a node ID; version 4 (v4) UUIDs from a rando/mpseudo-random
 number; version 3 (v3) UUIDs from hashing a namespace using MD5; version 5 (v5)
 from hashing a namespace using SHA-1.
 
@@ -66,6 +66,31 @@ _
                 create_v2 => 1,
                 create_v3 => 0,
                 create_v4 => 0,
+                create_v5 => 0,
+            },
+        },
+
+        {
+            module => 'UUID::FFI',
+            description => <<'_',
+
+This module provides access to libuuid via the FFI interface. It can create v1
+as well as v4 (random) UUIDs. Note that Data::UUID (XS-based) is faster this
+module (FFI-based).
+
+The benchmark code creates 1000+1 v1 string UUIDs.
+
+_
+            bench_code_template => 'UUID::FFI->new_time for 1..1000; UUID::FFI->new_time->as_hex',
+            features => {
+                is_xs => 1,
+                is_pp => 0,
+                create_v1 => 1,
+                create_v2 => 0,
+                create_v3 => 0,
+                create_v4 => 1,
+                v4_secure_random => 0,
+                v4_rfc4122 => 1,
                 create_v5 => 0,
             },
         },
