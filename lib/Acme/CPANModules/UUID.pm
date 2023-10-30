@@ -10,7 +10,7 @@ use warnings;
 
 our $LIST = {
     summary => 'List of modules that can generate immutable universally unique identifier (UUIDs)',
-    description => <<'_',
+    description => <<'MARKDOWN',
 
 UUIDs (Universally Unique Identifiers), sometimes also called GUIDs (Globally
 Unique Identifiers), are 128-bit numbers that can be used as permanent IDs or
@@ -41,7 +41,7 @@ Aside from the modules listed as entries below, there are also:
 <pm:App::UUIDUtils> (containing CLIs to create/check UUID), <pm:Data::GUID>
 (currently just a wrapper for Data::UUID).
 
-_
+MARKDOWN
     entry_features => {
         v4_rfc4122 => {summary => 'Whether the generated v4 UUID follows RFC 4122 specification (i.e. encodes variant and version information in M & N positions)'},
         v4_secure_random => {summary => 'Whether the module uses cryptographically secure pseudo-random number generator for v4 UUIDs'},
@@ -49,7 +49,7 @@ _
     entries => [
         {
             module => 'Data::UUID',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 This module creates v1 and v2 UUIDs. Depending on the OS, for MAC address, it
 usually uses a hash of hostname instead. This module is XS, so performance is
@@ -57,7 +57,7 @@ good. If you cannot use an XS module, try <pm:UUID::Tiny> instead.
 
 The benchmark code creates 1000+1 v1 string UUIDs.
 
-_
+MARKDOWN
             bench_code_template => 'my $u = Data::UUID->new; $u->create for 1..1000; $u->to_string($u->create)',
             features => {
                 is_xs => 1,
@@ -72,7 +72,7 @@ _
 
         {
             module => 'UUID::FFI',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 This module provides access to libuuid via the FFI interface. It can create v1
 as well as v4 (random) UUIDs. Note that Data::UUID (XS-based) is faster this
@@ -80,7 +80,7 @@ module (FFI-based).
 
 The benchmark code creates 1000+1 v1 string UUIDs.
 
-_
+MARKDOWN
             bench_code_template => 'UUID::FFI->new_time for 1..1000; UUID::FFI->new_time->as_hex',
             features => {
                 is_xs => 1,
@@ -97,7 +97,7 @@ _
 
         {
             module => 'UUID::Tiny',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 This module should be your go-to choice if you cannot use an XS module. It can
 create v1, v3, v4 UUIDs. However, the random v4 UUIDs are not cryptographically
@@ -108,7 +108,7 @@ The benchmark code creates 1000+1 v1 string UUIDs.
 See also: <pm:Types::UUID> which is a type library that uses Data::UUID as the
 backend.
 
-_
+MARKDOWN
             bench_code_template => 'UUID::Tiny::create_uuid() for 1..1000; UUID::Tiny::uuid_to_string(UUID::Tiny::create_uuid())',
             features => {
                 is_xs => 0,
@@ -125,7 +125,7 @@ _
 
         {
             module => 'UUID::Random',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 This module simply uses 32 calls to Perl's C<rand()> to construct each random
 hexadecimal digits of the UUID (v4). Not really recommended, since perl's
@@ -137,7 +137,7 @@ To create a cryptographically secure random UUIDs, use <pm:Crypt::Misc>.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
-_
+MARKDOWN
             bench_code_template => 'UUID::Random::generate() for 1..1000; ; UUID::Random::generate()',
             features => {
                 is_xs => 0,
@@ -154,13 +154,13 @@ _
 
         {
             module => 'UUID::Random::PERLANCAR',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Just another implementation of <pm:UUID::Random>.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
-_
+MARKDOWN
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -184,14 +184,14 @@ _
 
         {
             module => 'UUID::Random::Secure',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 Just like <pm:UUID::Random>, except it uses <pm:Math::Random::Secure>'s
 `irand()` to produce random numbers.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
-_
+MARKDOWN
             features => {
                 is_xs => 0,
                 is_pp => 1,
@@ -215,14 +215,14 @@ _
 
         {
             module => 'Crypt::Misc',
-            description => <<'_',
+            description => <<'MARKDOWN',
 
 This module from the <pm:CryptX> distribution has a function to create and check
 v4 UUIDs.
 
 The benchmark code creates 1000+1 v4 string UUIDs.
 
-_
+MARKDOWN
             bench_code_template => 'Crypt::Misc::random_v4uuid() for 1..1000; Crypt::Misc::random_v4uuid()',
             features => {
                 is_xs => 0,
@@ -234,6 +234,31 @@ _
                 v4_secure_random => 1,
                 v4_rfc4122 => 1,
                 create_v5 => 0,
+            },
+        },
+
+        {
+            module => 'UUID',
+            description => <<'MARKDOWN',
+
+This module generates DCE-compatible UUIDs, which according to RFC belongs to
+the legacy variants.
+
+The benchmark creates 1000+1 random UUIDs.
+
+MARKDOWN
+         bench_code_template => 'my $uuid; UUID::generate_random($uuid) for 1..1000; UUID::generate_random($uuid); $uuid',
+            features => {
+                is_xs => 1,
+                is_pp => 0,
+                create_v1 => 0,
+                create_v2 => 0,
+                create_v3 => 0,
+                create_v4 => 0,
+                v4_secure_random => 0,
+                v4_rfc4122 => 0,
+                create_v5 => 0,
+                create_legacy => 1,
             },
         },
 
