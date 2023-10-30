@@ -1,15 +1,15 @@
 package Acme::CPANModules::UUID;
 
+use strict;
+use warnings;
+
 # AUTHORITY
 # DATE
 # DIST
 # VERSION
 
-use strict;
-use warnings;
-
 our $LIST = {
-    summary => 'Modules that can generate immutable universally unique identifier (UUIDs)',
+    summary => 'List of modules that can generate immutable universally unique identifier (UUIDs)',
     description => <<'_',
 
 UUIDs (Universally Unique Identifiers), sometimes also called GUIDs (Globally
