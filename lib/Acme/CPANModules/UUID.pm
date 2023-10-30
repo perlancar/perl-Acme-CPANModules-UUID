@@ -246,3 +246,5 @@ _
 =head1 append:SEE ALSO
 
 RFC 4122, L<https://tools.ietf.org/html/rfc4122>
+
+L<https://en.wikipedia.org/wiki/Universally_unique_identifier>
